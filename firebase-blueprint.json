@@ -1,0 +1,128 @@
+{
+  "entities": {
+    "MenuItem": {
+      "title": "Menu Item",
+      "description": "An item on the restaurant menu",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "price": { "type": "number" },
+        "category": { "type": "string" },
+        "icon": { "type": "string" },
+        "image": { "type": "string" },
+        "description": { "type": "string" },
+        "cost": { "type": "number" },
+        "stock": { "type": "number" }
+      },
+      "required": ["id", "name", "price", "category", "stock"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "A customer order",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "orderNumber": { "type": "number" },
+        "items": { "type": "array" },
+        "subtotal": { "type": "number" },
+        "vatAmount": { "type": "number" },
+        "total": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "preparing", "ready", "delivered"] },
+        "paymentMethod": { "type": "string", "enum": ["cash", "online"] },
+        "customerName": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "deliveryAddress": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "orderNumber", "items", "total", "status", "createdAt"]
+    },
+    "Ingredient": {
+      "title": "Ingredient",
+      "description": "An ingredient used in the kitchen",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "stock": { "type": "number" },
+        "unit": { "type": "string" },
+        "minThreshold": { "type": "number" },
+        "costPerUnit": { "type": "number" },
+        "category": { "type": "string" }
+      },
+      "required": ["id", "name", "stock", "unit"]
+    },
+    "Staff": {
+      "title": "Staff",
+      "description": "A restaurant staff member",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "role": { "type": "string", "enum": ["cashier", "waiter", "chef", "manager"] },
+        "phone": { "type": "string" },
+        "active": { "type": "boolean" }
+      },
+      "required": ["id", "name", "role", "active"]
+    },
+    "Customer": {
+      "title": "Customer",
+      "description": "A customer in the loyalty program",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "loyaltyPoints": { "type": "number" },
+        "loyaltyTier": { "type": "string", "enum": ["bronze", "silver", "gold", "platinum"] }
+      },
+      "required": ["id", "phone", "loyaltyPoints", "loyaltyTier"]
+    },
+    "Reservation": {
+      "title": "Reservation",
+      "description": "A table reservation",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "dateTime": { "type": "string" },
+        "partySize": { "type": "number" },
+        "tableNumber": { "type": "string" },
+        "status": { "type": "string", "enum": ["confirmed", "completed", "cancelled"] }
+      },
+      "required": ["id", "customerName", "customerPhone", "dateTime"]
+    },
+    "Supplier": {
+      "title": "Supplier",
+      "description": "A supplier for the restaurant",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "contactPerson": { "type": "string" },
+        "phone": { "type": "string" }
+      },
+      "required": ["id", "name"]
+    },
+    "AppSettings": {
+      "title": "App Settings",
+      "description": "Global application settings",
+      "type": "object",
+      "properties": {
+        "restaurantName": { "type": "string" },
+        "vatRate": { "type": "number" }
+      }
+    }
+  },
+  "firestore": {
+    "/menu": { "schema": "MenuItem", "description": "Collection of menu items" },
+    "/orders/{orderId}": { "schema": "Order", "description": "Collection of customer orders" },
+    "/ingredients": { "schema": "Ingredient", "description": "Kitchen inventory" },
+    "/staff": { "schema": "Staff", "description": "Staff directory" },
+    "/customers": { "schema": "Customer", "description": "Customer loyalty database" },
+    "/reservations": { "schema": "Reservation", "description": "Table reservations" },
+    "/suppliers": { "schema": "Supplier", "description": "Supplier directory" },
+    "/settings/config": { "schema": "AppSettings", "description": "Global restaurant settings" }
+  }
+}

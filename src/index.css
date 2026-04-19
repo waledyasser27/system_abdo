@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+  --vibrant-bg: #FFF9F2;
+  --vibrant-primary: #FF6B35;
+  --vibrant-success: #2ECC71;
+  --vibrant-surface: #FFFFFF;
+  --vibrant-border: #F0F0F0;
+  --vibrant-text: #333333;
+  --vibrant-muted: #666666;
+}
+
+body {
+  background-color: var(--vibrant-bg);
+  color: var(--vibrant-text);
+}
+
+.section-title-accent {
+  border-right: 5px solid var(--vibrant-primary);
+  padding-right: 12px;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .receipt-print-area, .receipt-print-area * {
+    visibility: visible;
+  }
+  .receipt-print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  /* Hide close/print buttons from the print version */
+  .receipt-print-area button {
+    display: none !important;
+  }
+}
